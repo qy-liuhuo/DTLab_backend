@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mobinets.digitaltwinlab.dao.AccessLogMapper">
+
+    <sql id="insertFields">
+        member_id, direction, time
+    </sql>
+
+    <!--    <sql id="selectFields">-->
+    <!--        device_id, device_name, type, create_time, change_time-->
+    <!--    </sql>-->
+
+    <select id="selectAll" resultType="AccessLog">
+        select *
+        from access_log
+    </select>
+
+    <select id="selectByMemberId" resultType="AccessLog">
+        select *
+        from access_log where member_id = #{memberId}
+    </select>
+
+    <insert id="insertLog" parameterType="AccessLog" keyProperty="id">
+        insert into access_log (<include refid="insertFields"></include>)
+        values(#{memberId}, #{direction}, #{time})
+    </insert>
+</mapper>
